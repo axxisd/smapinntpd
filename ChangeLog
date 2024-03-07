@@ -1,5 +1,18 @@
 2024-03-06  Nicholas Boel  <axxisd@gmail.com>
 
+2.1.0
+
+  * Update ChangeLog
+
+  * nntpserv.h
+    - Change location of smapi headers
+
+  * /smapi/*
+    - Include smapi sources for easy compilation.
+    - Smapi is part of the huskyproject - https://github.com/huskyproject
+
+2024-03-06  Nicholas Boel  <axxisd@gmail.com>
+
   * main.c
     - IPv6 support (patch by Konstantine Kuzov)
 

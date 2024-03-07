@@ -19,9 +19,9 @@ typedef unsigned short ushort;
 typedef int bool;
 typedef unsigned char uchar;
 
-#include <smapi/msgapi.h>
+#include "../smapi/h/msgapi.h"
 #ifndef __PROGPROT_H__
-#include <smapi/progprot.h>
+#include "../smapi/h/progprot.h"
 #endif
 struct var
 {
