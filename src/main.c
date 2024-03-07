@@ -392,7 +392,7 @@ int main(int argc, char **argv)
 { 
    SOCKET sock;
    int error,res; 
-   struct sockaddr_in local;
+   struct sockaddr_in6 local;
    fd_set fds;
    struct timeval tv;
    FILE *fp;
@@ -489,7 +489,7 @@ int main(int argc, char **argv)
       exit(10);
    }
 
-   sock = socket(PF_INET,SOCK_STREAM,IPPROTO_TCP);
+   sock = socket(PF_INET6,SOCK_STREAM,IPPROTO_TCP);
 
    if(sock == INVALID_SOCKET)
    {
@@ -504,9 +504,8 @@ int main(int argc, char **argv)
 
    memset(&local, 0, sizeof(local) );
 
-   local.sin_family = AF_INET;
-   local.sin_addr.s_addr = INADDR_ANY;
-   local.sin_port = htons(cfg_port);
+   local.sin6_family = AF_INET6;
+   local.sin6_port = htons(cfg_port);
 
    error = bind(sock,(struct sockaddr *)&local,sizeof(local));
 

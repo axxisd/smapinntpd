@@ -572,8 +572,8 @@ void sendtextblock(struct var *var,uchar *text,struct xlat *xlat)
 
       /* End format=flowed */
 
-      if(stricmp(buf,".")==0) /* "." means end of message in NNTP */
-         strcpy(buf,"..");
+      if(buf[0]=='.')
+         memmove(buf+1,buf,strlen(buf)+1);
 
       strcat(buf,CRLF);
 
@@ -628,7 +628,7 @@ void command_abhs(struct var *var,uchar *cmd)
    }
    else if(article[0] == '<' && article[strlen(article)-1] == '>')
    {
-      strcpy(article,&article[1]);
+      memmove(article,article+1,strlen(article));
       article[strlen(article)-1]=0;
 
       at=strchr(article,'@');
@@ -936,6 +936,14 @@ void command_abhs(struct var *var,uchar *cmd)
       else             strcpy(dispaddr,fromaddr);
       
       sockprintf(var,"Path: SmapiNNTPd!not-for-mail" CRLF);
+
+      {
+          unsigned zone,net,node,point;
+          if(sscanf(dispaddr,"%u:%u/%u.%u", &zone, &net, &node, &point)==4)
+                 sprintf(dispaddr,"%u@%u.%u.%u", point, node, net, zone);
+          else if(sscanf(dispaddr,"%u:%u/%u", &zone, &net, &node)==3)
+                 sprintf(dispaddr,"0@%u.%u.%u", node, net, zone);
+      }
 
       mimesendheaderline(var,"From",dispname,chrs,dispaddr,cfg_noencode);
       mimesendheaderline(var,"X-Comment-To",toname,chrs,NULL,cfg_noencode);
@@ -1319,12 +1327,20 @@ void command_xover(struct var *var)
                      if(xmsg.replyto)
                         sprintf(reply,"<%ld$%s@SmapiNNTPd>",xmsg.replyto,var->currentgroup->tagname);
       
+                     {
+                        unsigned zone,net,node,point;
+                        if(sscanf(dispaddr,"%u:%u/%u.%u", &zone, &net, &node, &point)==4)
+                               sprintf(dispaddr,"%u@%u.%u.%u", point, node, net, zone);
+                        else if(sscanf(dispaddr,"%u:%u/%u", &zone, &net, &node)==3)
+                               sprintf(dispaddr,"0@%u.%u.%u", node, net, zone);
+                     }
+
                      mimemakeheaderline(mimefrom,1000,"From",dispname,chrs,dispaddr,cfg_noencode);
                      mimemakeheaderline(mimesubj,1000,"Subject",subject,chrs,NULL,cfg_noencode);
       
-                     strcpy(mimefrom,&mimefrom[6]);
-                     strcpy(mimesubj,&mimesubj[9]);
-      
+                     memmove(mimefrom,mimefrom+6,strlen(mimefrom)-5);
+                     memmove(mimesubj,mimesubj+9,strlen(mimesubj)-8);
+
                      stripctrl(mimesubj);
                      stripctrl(mimefrom);
       
@@ -1441,7 +1457,7 @@ void getparentinfo(struct var *var,uchar *article,uchar *currentgroup,uchar *msg
    if(article[0] != '<' || article[strlen(article)-1] != '>')
       return;
 
-   strcpy(article,&article[1]);
+   memmove(article,article+1,strlen(article));
    article[strlen(article)-1]=0;
 
    at=strchr(article,'@');
@@ -1629,7 +1645,7 @@ void cancelmessage(struct var *var,uchar *article,struct xlat *postxlat)
       return;
    }
 
-   strcpy(article,&article[1]);
+   memmove(article,article+1,strlen(article));
    article[strlen(article)-1]=0;
 
    at=strchr(article,'@');
@@ -2058,6 +2074,8 @@ void command_post(struct var *var)
       }
       else
       {
+      if(line[0]=='.')
+         memmove(line,line+1,strlen(line));
          if(textpos + strlen(line) > POST_MAXSIZE-1)
          {
             toobig=TRUE;
@@ -2186,7 +2204,7 @@ void command_post(struct var *var)
             if(from[0] == '\"' && from[strlen(from)-1]=='\"')
             {
                from[strlen(from)-1]=0;
-               strcpy(from,&from[1]);
+               memmove(from,from+1,strlen(from));
                unbackslashquote(from); /* Text in "" should be un-backslash-quoted */
             }
          }
@@ -2256,7 +2274,7 @@ void command_post(struct var *var)
    /* Strip Re: */
 
    if(!cfg_nostripre && (strncmp(subject,"Re: ",4)==0 || strcmp(subject,"Re:")==0))
-      strcpy(subject,&subject[4]);
+      memmove(subject,subject+4,strlen(subject)-3);
    
    /* Truncate strings */
 
@@ -2348,7 +2366,7 @@ void command_post(struct var *var)
       if(flowed && line[0]!=0 && line[0]!='>' && strncmp(line,"-- ",3)!=0)
       {
          if(line[0] == ' ')
-            strcpy(line,&line[1]);
+            memmove(line,line+1,strlen(line));
 
          if(line[strlen(line)-1] == ' ')
          {
@@ -2504,7 +2522,7 @@ void command_post(struct var *var)
       if(text[c] == 13) c++;
       if(text[c] == 13) c++;
          
-      strcpy(text,&text[c]);    
+      memmove(text,text+c,strlen(text)-c+1);
       
       if((ch=strchr(line,',')))
       {
@@ -2580,8 +2598,8 @@ void command_post(struct var *var)
    
    if(!g->netmail && !g->local)
    {
-      if(newsreader[0]==0 || cfg_notearline)  strcpy(line,CR "---" CR);
-      else                                    sprintf(line,CR "--- %s" CR,newsreader);
+      if(newsreader[0]==0 || cfg_notearline)  strcpy(line,"---" CR);
+      else                                    sprintf(line,"--- %s" CR,newsreader);
 
       if(strlen(text) + strlen(line) < allocsize-1)
          strcat(text,line);
@@ -2694,7 +2712,10 @@ void command_post(struct var *var)
       setchrscodepage(chrs,codepage,xlat->tochrs);
       
       if(chrs[0])
-         sprintf(&kludges[strlen(kludges)],"\01CHRS: %s 2",chrs);
+         if(stricmp(chrs,"UTF-8")!=0)
+            sprintf(&kludges[strlen(kludges)],"\01CHRS: %s 2",chrs);
+         else
+            sprintf(&kludges[strlen(kludges)],"\01CHRS: %s 4",chrs);
       
       if(codepage[0])
          sprintf(&kludges[strlen(kludges)],"\01CODEPAGE: %s",codepage);
@@ -2925,8 +2946,8 @@ void server(SOCKET s)
    struct var var;
 
    struct hostent *hostent;
-   struct sockaddr_in fromsa;
-   int fromsa_len = sizeof(struct sockaddr_in);
+   struct sockaddr_in6 fromsa;
+   int fromsa_len = sizeof(struct sockaddr_in6);
 
    os_getexclusive();
    server_openconnections++;
@@ -2985,16 +3006,16 @@ void server(SOCKET s)
       return;
    }
 
-   sprintf(var.clientid,"%s:%u",inet_ntoa(fromsa.sin_addr),ntohs(fromsa.sin_port));
+   inet_ntop(AF_INET6, &fromsa.sin6_addr, lookup, sizeof(lookup));
 
-   mystrncpy(lookup,inet_ntoa(fromsa.sin_addr),200);
+   snprintf(var.clientid,200,"%s:%u",lookup,ntohs(fromsa.sin6_port));
 
-   if((hostent=gethostbyaddr((char *)&fromsa.sin_addr,sizeof(fromsa.sin_addr),AF_INET)))
+   if((hostent=gethostbyaddr((char *)&fromsa.sin6_addr,sizeof(fromsa.sin6_addr),AF_INET6)))
       mystrncpy(lookup,hostent->h_name,200);
 
    os_logwrite("(%s) Connection established to %s",var.clientid,lookup);
 
-   if(!checkallow(&var,inet_ntoa(fromsa.sin_addr)))
+   if(!checkallow(&var,lookup))
    {
       socksendtext(&var,"502 Access denied." CRLF);
       os_logwrite("(%s) Access denied (not in allow list)",var.clientid);
@@ -3164,6 +3185,10 @@ void server(SOCKET s)
          else if(stricmp(cmd,"XOVER")==0)
          {
             command_xover(&var);
+         }
+         else if(stricmp(cmd,"MODE")==0)
+         {
+            socksendtext(&var,"200 Server ready - posting allowed" CRLF);
          }
          else
          {

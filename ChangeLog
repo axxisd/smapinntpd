@@ -1,3 +1,19 @@
+2024-03-06  Nicholas Boel  <axxisd@gmail.com>
+
+  * main.c
+    - IPv6 support (patch by Konstantine Kuzov)
+
+  * nntpserv.c
+    - IPv6 support (patch by Konstantine Kuzov)
+    - Fix for UTF-8 level parameter
+    - Fix for response to MODE READER command (patch by @cnb)
+    - Fix text and header corruption issues (patch by @cnb)
+    - Fix issue with lines starting with a period (patch by @cnb)
+    - Make From addresses into valid RFC 5322 addresses. (patch by @nafmo)
+
+  * nntpserv.h
+    - Use SERVER_VERSION for PID kludge (patch by @cnb)
+
 2013-06-19  Robert James Clay  <jame@rocasa.us>
 
   * Correct listed copyright years for Johan Billing in the README file.
