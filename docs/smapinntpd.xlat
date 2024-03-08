@@ -21,7 +21,7 @@ chsdir /home/fido/smapinntpd/xlat
 #
 # You can enter group-specific default charsets in smapinntpd.groups.
 
-defaultread IBMPC
+defaultread CP437
 
 # Syntax: read <CHRS>[,<CODEPAGE>] <tochrs> [<xlat file>] [-keepsoftcr]
 #
@@ -38,6 +38,23 @@ read CP865      iso-8859-1    865_iso.chs
 read CP866      koi8-r        866_koi.chs   -keepsoftcr
 read LATIN-1    iso-8859-1
 
+# Charset configuration for SmapiNNTPd using Unicode
+#
+# It is necessary to still have the "read" translations for the charsets you
+# will be posting in or SmapiNNTPd will not be able to translate the receiver
+# name properly. Unfortunately posting in utf-8 is not possible at this time.
+
+# Here is an example UTF-8 configuration. Uncomment all related UTF-8 lines
+# below, and comment out the 'defaultpost' and 'post' lines that you are
+# replacing if you want to give this a try.
+
+#read CP437      UTF-8         437_utf.chs
+#read CP850      UTF-8         850_utf.chs
+#read CP865      UTF-8         865_utf.chs
+#read CP866      UTF-8         866_utf.chs
+#read LATIN-1    UTF-8         iso_utf.chs
+#read UTF-8      UTF-8                     -keepsoftcr
+
 # readalias can be used to configure aliases for charsets
 
 readalias IBMPC,850  CP850
@@ -51,6 +68,7 @@ readalias IBMPC      CP437
 # when no charset was specified. 
 
 defaultpost iso-8859-1
+#defaultpost utf-8
 
 # Syntax: post <charset> <CHRS>[,<CODEPAGE>] <xlat file>
 #
@@ -61,6 +79,7 @@ defaultpost iso-8859-1
 
 post iso-8859-1 IBMPC         iso_437.chs
 post koi8-r     CP866         koi_866.chs
+#post * utf-8
 
 # postalias can be used to configure aliases for charsets
 #
