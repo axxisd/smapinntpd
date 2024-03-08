@@ -8,12 +8,10 @@ SmapiNNTPd is an NNTP server that allows newsreaders to access JAM, Squish,
 or *.msg message bases and was originally derived from JamNNTPd which could
 only access JAM message bases.
 
-This program needs SMAPI to run, get it at http://husky.sourceforge.net/
-
-
 2. Copyright
 ============
 
+Copyright (C)      2024, Nicholas Boel <axxisd@gmail.com>
 Copyright (C)      2013, Robert James Clay <jame@rocasa.us>
 Copyright (C)      2013, Ruedi Knebuehler <ruedi@baboon.ch>
 Copyright (C) 2003-2005, Johan Billing <billing@df.lth.se>
@@ -31,7 +29,7 @@ decide to use it, you do it on your own risk. If you use SmapiNNTPd under
 Linux, you should avoid running it with root privileges.
 
 4. Using SmapiNNTPd
-=================
+===================
 
 4.1 Configuration options
 -------------------------
@@ -46,8 +44,8 @@ specified below. These can be given to SmapiNNTPd in two ways:
    -create option.
 
 If SmapiNNTPd is run without any commandline arguments at all, it will attempt 
-to read options from a file called "jamnntpd.config" if present. Under Linux, 
-SmapiNNTPd  will look for this file in the "/etc" directory and under Windows 
+to read options from a file called "smapinntpd.config" if present. Under Linux, 
+SmapiNNTPd will look for this file in the "/etc" directory and under Windows 
 in the current directory. 
 
 It is not necessary to specify any configuration options at all unless when
@@ -277,7 +275,7 @@ SmapiNNTPd should compile with most compilers. I use gcc under Linux and MinGW
 under Windows. To compile SmapiNNTPd, go to the src directory and type either 
 "make linux" or "make win32" depending on what platform you are compiling 
 SmapiNNTPd on. After a successful compilation, you will find a file called 
-"jamnntpd" or "jamnntpd.exe" in the src directory.
+"smapinntpd" or "smapinntpd.exe" in the src directory.
 
 6. Compatibility
 ================
@@ -418,20 +416,19 @@ site above.
 =====================================
 Some notes on using SmapiNNTPd with the hpt tosser from the Husky project:
 
- * The fidoconfig2jamnntpd.pl script homepage can be used to convert your
-   area configuration to a jamnntpd.groups file.
+ * The fidoconfig2jamnntpd.pl script can be used to convert your area
+   configuration to a smapinntpd.groups file.
 
  * If you want SmapiNNTPd to display the From address correctly, you need to
    run it with the -readorigin switch.
 
  * When hpt creates JAM messagebases, it does not create the lastread (*.jlr)
    file. SmapiNNTPd will not be able to open an area unless all four JAM files
-   are present. The checkgroups.pl script from the SmapiNNTPd homepage can be
-   used to create missing *.jlr files.
+   are present. The checkgroups.pl script used to create missing *.jlr files.
 
- * Do NOT pack your messagebase with "hpt pack". When hpt packs a messagebase,
-   it will also renumber it. This will cause the article numbers in SmapiNNTPd
-   to change which will confuse most newsreaders.
+ * Do NOT pack your messagebase with "hptutil pack". When hpt packs a 
+   messagebase, it will also renumber it. This will cause the article numbers 
+   in SmapiNNTPd to change which will confuse most newsreaders.
 
  * SmapiNNTPd can optionally create an echomail.jam files with the paths to
    messagebases with messages to export. This file can not be used to tell
