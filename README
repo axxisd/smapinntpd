@@ -136,6 +136,8 @@ Options for posting messages:
    header field in the tearline of posted messages. This option disables this
    behaviour and leaves the tearline blank.
  
+   This can be modified by the user by logging in with parameters (section 4.4)
+
  -noreplyaddr
 
    SmapiNNTPd normally adds a REPLYADDR kludge with the e-mail address of the
@@ -253,7 +255,7 @@ every time a new connection to the server is made.
 4.4 Logging in with parameters
 ------------------------------
 Since it is likely that all users will not prefer the same settings for the
-flowed and showto options (see section 4.1), these can be modified by the
+flowed, showto, and notearline options (see section 4.1), these can be modified by the
 user by logging in with parameters.
 
 If you want to set these options, login using a login name of this format:
@@ -267,6 +269,7 @@ Examples:
 
  billing/showto=off
  billing/flowed=on,showto=on
+ billing/notearline=on
  /flowed=off
 
 5. Compilation

@@ -22,7 +22,7 @@ bool cfg_debug;
 bool cfg_noecholog;
 bool cfg_nostripre;
 bool cfg_noreplyaddr;
-bool cfg_notearline;
+bool cfg_notearline = CFG_NOTEARLINE;
 bool cfg_smartquote;
 bool cfg_noencode;
 bool cfg_notzutc;
@@ -2282,7 +2282,6 @@ void command_post(struct var *var)
    from[36]=0;
    subject[72]=0;
    organization[70]=0;
-   newsreader[75]=0;
 
    /* Check syntax */
 
@@ -2596,11 +2595,11 @@ void command_post(struct var *var)
    }
 
    /* Add tearline and origin */
-   
+
    if(!g->netmail && !g->local)
    {
-      if(newsreader[0]==0 || cfg_notearline)  strcpy(line,"---" CR);
-      else                                    sprintf(line,"--- %s" CR,newsreader);
+      if(newsreader[0]==0 || var->opt_notearline)  strcpy(line,"---" CR);
+      else                                         sprintf(line,"--- %.75s" CR,newsreader);
 
       if(strlen(text) + strlen(line) < allocsize-1)
          strcat(text,line);
@@ -2707,6 +2706,9 @@ void command_post(struct var *var)
    }
 
    sprintf(&kludges[strlen(kludges)],"\01PID: " SERVER_NAME " " SERVER_PIDVERSION);
+
+   if(var->opt_notearline || cfg_notearline)
+      sprintf(&kludges[strlen(kludges)],"\01NOTE: %s",newsreader);
 
    if(xlat->tochrs[0] && !g->nochrs)
    {
@@ -2816,7 +2818,7 @@ void command_post(struct var *var)
 void command_authinfo(struct var *var)
 {
    uchar *tmp,*opt,*next,*equal;
-   bool flowed,showto;
+   bool flowed,showto,notearline;
 
    if(!(tmp=parseinput(var)))
    {
@@ -2866,6 +2868,7 @@ void command_authinfo(struct var *var)
 
    flowed=var->opt_flowed;
    showto=var->opt_showto;
+   notearline=var->opt_notearline;
 
    if(strchr(var->loginname,'/'))
    {
@@ -2911,9 +2914,17 @@ void command_authinfo(struct var *var)
             return;
          }
       }
+      else if(stricmp(opt,"notearline")==0)
+      {
+         if(!(setboolonoff(equal,&notearline)))
+         {
+            sockprintf(var,"482 Unknown setting %s for option %s, use on or off" CRLF,equal,opt);
+            return;
+         }
+      }
       else
       {
-         sockprintf(var,"482 Unknown option %s, known options: flowed, showto" CRLF,opt);
+         sockprintf(var,"482 Unknown option %s, known options: flowed, showto, notearline" CRLF,opt);
          return;
       }
 
@@ -2937,6 +2948,7 @@ void command_authinfo(struct var *var)
 
    var->opt_flowed=flowed;
    var->opt_showto=showto;
+   var->opt_notearline=notearline;
 
    return;
 }
@@ -2978,6 +2990,7 @@ void server(SOCKET s)
    
    var.opt_flowed=cfg_def_flowed;
    var.opt_showto=cfg_def_showto;
+   var.opt_notearline=cfg_notearline;
 
    if(getpeername(s,(struct sockaddr *)&fromsa,&fromsa_len) == SOCKET_ERROR)
    {
@@ -3132,12 +3145,14 @@ void server(SOCKET s)
             socksendtext(&var,"IHAVE (not implemented, messages are always rejected)" CRLF);
             socksendtext(&var,"LAST" CRLF);
             socksendtext(&var,"LIST" CRLF);
+            socksendtext(&var,"MODE" CRLF);
             socksendtext(&var,"NEWGROUPS (not implemented, always returns an empty list)" CRLF);
             socksendtext(&var,"NEWNEWS (not implemented, always returns an empty list)" CRLF);
             socksendtext(&var,"NEXT" CRLF);
             socksendtext(&var,"QUIT" CRLF);
             socksendtext(&var,"SLAVE (has no effect)" CRLF);
             socksendtext(&var,"STAT" CRLF);
+            socksendtext(&var,"XHDR (not implemented, always returns an empty list)" CRLF);
             socksendtext(&var,"XOVER (partially implemented, byte count and line count are always empty)" CRLF);
             socksendtext(&var,CRLF);
             socksendtext(&var,"SmapiNNTPd supports most of RFC-977 and also has support for AUTHINFO and" CRLF);
@@ -3182,6 +3197,11 @@ void server(SOCKET s)
          {
             socksendtext(&var,"205 Goodbye" CRLF);
             var.disconnect=1;
+         }
+         else if(stricmp(cmd,"XHDR")==0)
+         {
+            socksendtext(&var,"221 Warning: XHDR not implemented, returning empty list" CRLF);
+            socksendtext(&var,"." CRLF);
          }
          else if(stricmp(cmd,"XOVER")==0)
          {

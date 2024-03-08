@@ -1,5 +1,28 @@
 2024-03-08  Nicholas Boel  <axxisd@gmail.com>
 
+2.1.4
+
+  * nntpserv.c
+    - Declare CFG_NOTEARLINE (might not be needed, but it works at the moment)
+    - Only truncate newsreader variable when used in tearline
+    - When config option 'notearline' is enabled:
+        Add NOTE: kludge with Newsreader's user-agent information (not 
+        truncated)
+    - Add user defined login option 'notearline=on/off'
+    - Add MODE to help text recognized responses
+    - Add XHDR to help text recognized responses
+    - Give a successful response to clients that request XHDR and tell you
+      you don't support it (no actual functionality, though)
+
+  * README
+    - Add notes and example about 'notearline=on/off' option
+
+  * nntpserv.h
+    - Define member 'opt_notearline'
+    - Minor version bump
+
+2024-03-08  Nicholas Boel  <axxisd@gmail.com>
+
 2.1.3
 
   * nntpserv.c

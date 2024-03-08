@@ -59,6 +59,7 @@ struct var
    
    bool opt_flowed;
    bool opt_showto;
+   bool opt_notearline;
 
    bool login;
 };
@@ -78,7 +79,7 @@ struct var
 #define CRLF CR LF
 
 #define SERVER_NAME       "Smapinntpd/" PLATFORM_NAME
-#define SERVER_VERSION    "2.1.3"
+#define SERVER_VERSION    "2.1.4"
 #define SERVER_PIDVERSION SERVER_VERSION
 
 #define SOCKIO_TIMEOUT 5*60
@@ -105,6 +106,7 @@ void server(SOCKET s);
 
 #define CFG_DEF_FLOWED     TRUE
 #define CFG_DEF_SHOWTO     TRUE
+#define CFG_NOTEARLINE     FALSE
 
 #define MAX_NUMBERS_ORIGIN	10
 
