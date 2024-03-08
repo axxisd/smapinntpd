@@ -1,3 +1,17 @@
+2024-03-08  Nicholas Boel  <axxisd@gmail.com>
+
+2.1.3
+
+  * nntpserv.c
+    - Add logging for which message bases are accessed
+
+  * nntpserv.h
+    - Minor version bump
+
+  * Remove TODO
+
+  * Update ChangeLog
+
 2024-03-07  Nicholas Boel  <axxisd@gmail.com>
 
 2.1.2

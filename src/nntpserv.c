@@ -150,6 +150,7 @@ bool smapiopenarea(struct var *var,struct group *group)
    }
 
    var->opengroup=group;
+   os_logwrite("(%s) Accessing %s messagebase \"%s\"",var->clientid,typename,realname);
 
    return(TRUE);
 }
