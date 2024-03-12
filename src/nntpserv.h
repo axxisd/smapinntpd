@@ -19,9 +19,9 @@ typedef unsigned short ushort;
 typedef int bool;
 typedef unsigned char uchar;
 
-#include "../smapi/h/msgapi.h"
+#include <smapi/msgapi.h>
 #ifndef __PROGPROT_H__
-#include "../smapi/h/progprot.h"
+#include <smapi/progprot.h>
 #endif
 struct var
 {
@@ -79,7 +79,7 @@ struct var
 #define CRLF CR LF
 
 #define SERVER_NAME       "Smapinntpd/" PLATFORM_NAME
-#define SERVER_VERSION    "2.1.4"
+#define SERVER_VERSION    "2.1.5"
 #define SERVER_PIDVERSION SERVER_VERSION
 
 #define SOCKIO_TIMEOUT 5*60

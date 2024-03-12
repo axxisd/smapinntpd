@@ -8,6 +8,9 @@ SmapiNNTPd is an NNTP server that allows newsreaders to access JAM, Squish,
 or *.msg message bases and was originally derived from JamNNTPd which could
 only access JAM message bases.
 
+This program needs SMAPI to run. Get it at https://github.com/huskyproject,
+and follow the installation instruction there.
+
 2. Copyright
 ============
 

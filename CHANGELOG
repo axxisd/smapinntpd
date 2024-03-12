@@ -1,3 +1,22 @@
+2024-03-11  Nicholas Boel  <axxisd@gmail.com>
+
+2.1.5
+
+  * os_win32.h
+    - Fix for Win32 compilation failure (broken when IPv6 support was added)
+
+  * /smapi/*
+    - REVERT and remove smapi sources
+    - Smapi is part of the huskyproject - https://github.com/huskyproject
+
+  * nntpserv.h
+    - REVERT inclusion of smapi headers to original
+    - Minor version bump
+
+  * Update README
+
+  * Update CHANGELOG
+
 2024-03-08  Nicholas Boel  <axxisd@gmail.com>
 
 2.1.4

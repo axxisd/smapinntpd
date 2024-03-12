@@ -1,4 +1,5 @@
-#include <winsock.h>
+#include <winsock2.h>
+#include <ws2ipdef.h>
 #include <process.h>
 
 #define PLATFORM_NAME "Win32"
