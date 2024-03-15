@@ -78,8 +78,8 @@ struct var
 
 #define CRLF CR LF
 
-#define SERVER_NAME       "Smapinntpd/" PLATFORM_NAME
-#define SERVER_VERSION    "2.1.5"
+#define SERVER_NAME       "smapinntpd/" PLATFORM_NAME
+#define SERVER_VERSION    "2.1.6"
 #define SERVER_PIDVERSION SERVER_VERSION
 
 #define SOCKIO_TIMEOUT 5*60
@@ -106,7 +106,6 @@ void server(SOCKET s);
 
 #define CFG_DEF_FLOWED     TRUE
 #define CFG_DEF_SHOWTO     TRUE
-#define CFG_NOTEARLINE     FALSE
 
 #define MAX_NUMBERS_ORIGIN	10
 

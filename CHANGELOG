@@ -1,5 +1,16 @@
 2024-03-11  Nicholas Boel  <axxisd@gmail.com>
 
+2.1.6
+
+  * nntpserv.c
+    - Removed CFG_NOTEARLINE
+
+  * nntpserv.h
+    - Removed CFG_NOTEARLINE
+    - Minor version bump
+
+  * Update CHANGELOG 
+
 2.1.5
 
   * os_win32.h

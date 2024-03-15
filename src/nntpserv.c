@@ -22,7 +22,7 @@ bool cfg_debug;
 bool cfg_noecholog;
 bool cfg_nostripre;
 bool cfg_noreplyaddr;
-bool cfg_notearline = CFG_NOTEARLINE;
+bool cfg_notearline;
 bool cfg_smartquote;
 bool cfg_noencode;
 bool cfg_notzutc;
