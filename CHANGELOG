@@ -1,3 +1,22 @@
+2024-03-16  Nicholas Boel  <axxisd@gmail.com>
+
+2.2.0
+
+  * nntpserv.c
+    - Add user defined login option 'notearline=on/off'
+
+  * smapinntpd.xlat
+    - Add more charset options for posting
+
+  * nntpserv.h
+    - Define 'opt_smartquote'
+    - Major version bump
+
+  * Update README
+    - Add user defined login option 'notearline=on/off'
+
+  * Update CHANGELOG
+
 2024-03-15  Nicholas Boel  <axxisd@gmail.com>
 
 2.1.9

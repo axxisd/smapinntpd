@@ -79,8 +79,11 @@ defaultpost iso-8859-1
 #post ISO-8859-1        CP437         iso_437.chs
 #post KOI8-R            CP866         koi_866.chs
 post US-ASCII           US-ASCII
+post CP437              CP437
+post CP850              CP850
+post CP866              CP866
 post ISO-8859-1         LATIN-1
-post ISO-8859-15        ISO-8859-15
+post KOI8-R             KOI-R
 post UTF-8              UTF-8
 
 # postalias can be used to configure aliases for charsets
@@ -89,5 +92,5 @@ post UTF-8              UTF-8
 # may be close enough for most people.
 
 postalias WINDOWS-1252 ISO-8859-1
-#postalias ISO-8859-15  ISO-8859-1
+postalias ISO-8859-15  ISO-8859-1
 #postalias US-ASCII     ISO-8859-1

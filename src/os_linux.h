@@ -11,7 +11,7 @@
 #define stricmp strcasecmp
 #define strnicmp strncasecmp
 
-#define PLATFORM_NAME "linux"
+#define PLATFORM_NAME "Linux"
 
 #define CFG_BASEPATH "/etc/"
 #define LOG_BASEPATH "/var/spool/log/"
