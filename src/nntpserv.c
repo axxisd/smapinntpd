@@ -2933,7 +2933,7 @@ void command_authinfo(struct var *var)
       }
       else
       {
-         sockprintf(var,"482 Unknown option %s, known options: flowed, showto, notearline,smartquote" CRLF,opt);
+         sockprintf(var,"482 Unknown option %s, known options: flowed, showto, notearline, smartquote" CRLF,opt);
          return;
       }
 

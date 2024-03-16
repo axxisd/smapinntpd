@@ -1,9 +1,15 @@
 2024-03-16  Nicholas Boel  <axxisd@gmail.com>
 
+2.2.1
+
+  * Fix typos in previous commit
+
+2024-03-16  Nicholas Boel  <axxisd@gmail.com>
+
 2.2.0
 
   * nntpserv.c
-    - Add user defined login option 'notearline=on/off'
+    - Add user defined login option 'smartquote=on/off'
 
   * smapinntpd.xlat
     - Add more charset options for posting
@@ -13,7 +19,7 @@
     - Major version bump
 
   * Update README
-    - Add user defined login option 'notearline=on/off'
+    - Add user defined login option 'smartquote=on/off'
 
   * Update CHANGELOG
 
