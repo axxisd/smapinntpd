@@ -1,15 +1,26 @@
 2024-03-15  Nicholas Boel  <axxisd@gmail.com>
 
+2.1.8
+
+  * Move example config files to 'examples' directory
+  * Update xlat config file to be more sensible
+
+  * nntpserv.h
+    - Minor version bump
+
+  * Update CHANGELOG
+
 2.1.7
 
   * Add 'util' directory which includes the perl scripts mentioned in the
-    README.
+    README
 
     checkgroups.pl
     echomailjam2hpt.pl
     fidoconfig2jamnntpd.pl
 
-  * Minor version bump
+  * nntpserv.h
+    - Minor version bump
 
   * Update CHANGELOG
 

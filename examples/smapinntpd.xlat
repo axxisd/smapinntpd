@@ -1,0 +1,93 @@
+# Charset configuration for JamNNTPd
+#
+# If you want to disable charset translation, uncomment the following two lines
+# and remove the rest of the file.
+#
+#read * unknown-8bit
+#post * ""
+
+# This is the directory where the *.chs files will be found
+
+chsdir /home/fido/smapinntpd/xlat
+
+# Charset translations when reading messages
+
+# The charset specified with "defaultread" is the charset JamNNTPd will use
+# when no charset was specified in the CHRS and CODEPAGE lines. If you enter
+# the character "!" before the charset, the "force" mode is activated. In 
+# "force" mode, the specified charset is used regardless of the contents of 
+# the CHRS and CODEPAGE lines and messages can only be posted in charsets 
+# that can be translated to the forced character set. Example: !CP866
+#
+# You can enter group-specific default charsets in jamnntpd.groups.
+
+defaultread CP437
+
+# Syntax: read <CHRS>[,<CODEPAGE>] <tochrs> [<xlat file>] [-keepsoftcr]
+#
+# Here you can configure the charset translations to be used when reading
+# messages. CHRS and CODEPAGE are taken from the respective kludge lines. 
+# If you omit the xlat file, no actual charset translation will take place.
+#
+# The "-keepsoftcr" option can be used to prevent JamNNTPd from removing the
+# Soft-CR character (0x8d) as it is used in some character sets like CP866.
+#
+# Charset configuration for JamNNTPd using Unicode
+#
+# It is necessary to still have the "read" translations for the charsets you
+# will be posting in or JamNNTPd will not be able to translate the receiver
+# name properly. If you wish to use unicode, uncomment all the "utf-8 related
+# lines below.
+
+#read CP437     UTF-8           437_utf.chs
+#read CP850     UTF-8           850_utf.chs
+#read CP865     UTF-8           865_utf.chs
+#read CP866     UTF-8           866_utf.chs
+#read LATIN-1   UTF-8           iso_utf.chs
+#read UTF-8     UTF-8           -keepsoftcr
+
+read CP437      ISO-8859-1    437_iso.chs
+read CP850      ISO-8859-1    850_iso.chs
+read CP865      ISO-8859-1    865_iso.chs
+read CP866      KOI8-R        866_koi.chs   -keepsoftcr
+read LATIN-1    ISO-8859-1
+
+# readalias can be used to configure aliases for charsets
+
+#readalias ibmpc,850  cp850
+#readalias ibmpc,865  cp865
+#readalias ibmpc,866  cp866
+#readalias ibmpc      cp437
+
+# Charset translations when posting messages
+
+# The charset specified with "defaultpost" is the charset JamNNTPd will use
+# when no charset was specified. 
+
+defaultpost iso-8859-1
+#defaultpost utf-8
+
+# Syntax: post <charset> <CHRS>[,<CODEPAGE>] <xlat file>
+#
+# Here you can configure the charset translations to be used when posting
+# messages. If you don't want to create CHRS kludges, enter "" as CHRS.
+# You should have "read" translations set up for all charsets you accept or
+# the receiver name of the posts might not be translated properly. Below are
+# legit charsets and CHRS kludges. However, if you wish or need to translate,
+# you may do so.
+
+#post ISO-8859-1        CP437         iso_437.chs
+#post KOI8-R            CP866         koi_866.chs
+post US-ASCII           US-ASCII
+post ISO-8859-1         LATIN-1
+post ISO-8859-15        ISO-8859-15
+post UTF-8              UTF-8
+
+# postalias can be used to configure aliases for charsets
+#
+# WINDOWS-1252 and ISO-8859-15 are not exactly the same as ISO-8859-1, but
+# may be close enough for most people.
+
+postalias WINDOWS-1252 ISO-8859-1
+#postalias ISO-8859-15  ISO-8859-1
+#postalias US-ASCII     ISO-8859-1
