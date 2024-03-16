@@ -6,7 +6,7 @@
 #include <netdb.h>
 #include <unistd.h>
 
-#define PLATFORM_NAME "2"
+#define PLATFORM_NAME "os2"
 
 #define CFG_BASEPATH ""
 #define LOG_BASEPATH ""
