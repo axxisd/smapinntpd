@@ -1,4 +1,4 @@
-# Charset configuration for JamNNTPd
+# Charset configuration for SmapiNNTPd
 #
 # If you want to disable charset translation, uncomment the following two lines
 # and remove the rest of the file.
@@ -12,14 +12,14 @@ chsdir /home/fido/smapinntpd/xlat
 
 # Charset translations when reading messages
 
-# The charset specified with "defaultread" is the charset JamNNTPd will use
+# The charset specified with "defaultread" is the charset SmapiNNTPd will use
 # when no charset was specified in the CHRS and CODEPAGE lines. If you enter
 # the character "!" before the charset, the "force" mode is activated. In 
 # "force" mode, the specified charset is used regardless of the contents of 
 # the CHRS and CODEPAGE lines and messages can only be posted in charsets 
 # that can be translated to the forced character set. Example: !CP866
 #
-# You can enter group-specific default charsets in jamnntpd.groups.
+# You can enter group-specific default charsets in smapinntpd.groups.
 
 defaultread CP437
 
@@ -29,13 +29,13 @@ defaultread CP437
 # messages. CHRS and CODEPAGE are taken from the respective kludge lines. 
 # If you omit the xlat file, no actual charset translation will take place.
 #
-# The "-keepsoftcr" option can be used to prevent JamNNTPd from removing the
+# The "-keepsoftcr" option can be used to prevent SmapiNNTPd from removing the
 # Soft-CR character (0x8d) as it is used in some character sets like CP866.
 #
-# Charset configuration for JamNNTPd using Unicode
+# Charset configuration for SmapiNNTPd using Unicode
 #
 # It is necessary to still have the "read" translations for the charsets you
-# will be posting in or JamNNTPd will not be able to translate the receiver
+# will be posting in or SmapiNNTPd will not be able to translate the receiver
 # name properly. If you wish to use unicode, uncomment all the "utf-8 related
 # lines below.
 
@@ -61,7 +61,7 @@ read LATIN-1    ISO-8859-1
 
 # Charset translations when posting messages
 
-# The charset specified with "defaultpost" is the charset JamNNTPd will use
+# The charset specified with "defaultpost" is the charset SmapiNNTPd will use
 # when no charset was specified. 
 
 defaultpost iso-8859-1
