@@ -4,12 +4,12 @@
 
 1. Introduction
 ===============
+
 SmapiNNTPd is an NNTP server that allows newsreaders to access JAM, Squish,
 or *.msg message bases and was originally derived from JamNNTPd which could
 only access JAM message bases.
 
-This program needs SMAPI to run. Get it at https://github.com/huskyproject,
-and follow the installation instruction there.
+Please refer to section 5 for installation instructions.
 
 2. Copyright
 ============
@@ -27,6 +27,7 @@ may be freely used in other projects as long as credit is given.
 
 3. Security
 ===========
+
 I cannot guarantee that there are no security leaks in SmapiNNTPd. If you
 decide to use it, you do it on your own risk. If you use SmapiNNTPd under
 Linux, you should avoid running it with root privileges.
@@ -36,6 +37,7 @@ Linux, you should avoid running it with root privileges.
 
 4.1 Configuration options
 -------------------------
+
 The behaviour of SmapiNNTPd can be configured using the configuration options 
 specified below. These can be given to SmapiNNTPd in two ways:
 
@@ -213,6 +215,7 @@ Options for configuration files:
        
 4.2 Access rights
 -----------------
+
 Access rights in SmapiNNTPd is based on access groups. Every newsgroup in
 SmapiNNTPd belongs to an acess group. Access groups are named using one letter,
 typically A to Z (access groups are case-insensitive). In the configuration
@@ -231,6 +234,7 @@ defined in the "users" file.
 
 4.3 Configuration files
 -----------------------
+
 SmapiNNTPd uses four configuration files:
 
 1) In the "groups" file, the message areas that SmapiNNTPd should provide as
@@ -259,6 +263,7 @@ every time a new connection to the server is made.
 
 4.4 Logging in with parameters
 ------------------------------
+
 Since it is likely that all users will not prefer the same settings for the
 flowed, showto, notearline, and smartquote options (see section 4.1), these
 can be modified by the user by logging in with parameters.
@@ -279,17 +284,31 @@ Examples:
 
 5. Compilation
 ==============
+
 SmapiNNTPd should compile with most compilers. I use gcc under Linux and MinGW
-under Windows. To compile SmapiNNTPd, go to the src directory and type either 
-"make linux" or "make win32" depending on what platform you are compiling 
-SmapiNNTPd on. After a successful compilation, you will find a file called 
-"smapinntpd" or "smapinntpd.exe" in the src directory.
+under Windows. To compile SmapiNNTPd, follow these easy instructions:
+
+Do NOT modify huskymak.cfg. It has been simplified to only fetch and compile
+what is required for SmapiNNTPd to build successfully.
+
+1) Go to smapinntpd/src/husky and run build.sh (this is only required the
+   first time installing SmapiNNTPd).
+2) Go to smapinntpd/src and run "make linux", "make win32", or "make os2"
+   depending on what platform you are compiling SmapiNNTPd on.
+
+After a successful compilation, you will find a file called "smapinntpd" or
+"smapinntpd.exe" in the src directory.
+
+Future updates should only require a 'git pull' and a 'make <platform>' from
+the src directory, unless something major is done with the huskylib and/or 
+smapi sources. We can re-assess the situation if and when that time comes.
 
 6. Compatibility
 ================
 
 6.1 The NNTP protocol
 ---------------------
+
 SmapiNNTPd supports most of the basic NNTP protocol as specified in RFC-977.
 The commands IHAVE, NEWGROUPS and NEWNEWS are not implemented, but at least
 give valid response codes if a newsreader tries to use them. SmapiNNTPd also
@@ -298,6 +317,7 @@ never sends information about the line counts and byte counts of messages.
 
 6.2 Format of news messages
 ---------------------------
+
 SmapiNNTPd probably breaks the RFC-1036 specification on some minor points,
 but seems to work well enough with most newsreaders.
 
@@ -314,6 +334,7 @@ rejected). Crossposted messages will be rejected. Messages longer than
 
 6.3 MSGID / Message-ID
 ----------------------
+
 SmapiNNTPd does not present the MSGIDs found in the JAM messagebase as
 Message-IDs to the newsreader, but rather uses its own dummy Message-IDs
 instead. The references line in followups will be replaced by the proper
@@ -321,6 +342,7 @@ REPLY line.
 
 6.4 REPLYADDR
 -------------
+
 When a message is posted to a JAM messagebase, SmapiNNTPd converts the original
 from address to a REPLYADDR kludge. According to FSC-0035, REPLYADDR kludges
 should be accompanied by a REPLYTO line. SmapiNNTPd does not create a REPLYTO
@@ -329,6 +351,7 @@ REPLYADDR kludge altogether, use the -noreplyaddr option.
 
 6.5 format=flowed
 -----------------
+
 A recent extension to MIME (RFC-2646) specifies a format for "flowed" text,
 i. e. text that only has line breaks between paragraphs and not after every
 line. This format is more well-suited for fidonet messages than the
@@ -342,6 +365,7 @@ slightly worse both on the NNTP and fidonet side.
 
 6.6 Character set translation
 -----------------------------
+
 SmapiNNTPd has good support for character sets. The character set translation
 is configured in the "xlat" file and uses CHS files in the GoldED+ format for
 the actual translation. Extended CHS files with 256 character translations
@@ -349,6 +373,7 @@ are supported and a character may be translated to up to four characters.
 
 6.7 Netmail
 -----------
+
 SmapiNNTPd now also supports netmail. In netmail areas, users can only read
 messages to or from one of the names configured in the jamnntpd.users file.
 Replies to netmails are handled transparently and the name and address of
@@ -367,6 +392,7 @@ netmail and echomail areas.
  
 6.8 Tested newsreaders
 ----------------------
+
 SmapiNNTPd has been found to work with the following newsreaders:
 
    Mozilla 1.4.1
@@ -381,6 +407,7 @@ Of these, only Mozilla seems to support format=flowed.
 
 7. How to create additional *.chs files
 =======================================
+
 The *.chs files in the "xlat" and "unicode/xlat" directories are character 
 set translation tables in the GoldED+ format. The files were created from 
 mappings files found at this URL:
@@ -422,6 +449,7 @@ site above.
 
 8. Using the Husky project HPT tosser
 =====================================
+
 Some notes on using SmapiNNTPd with the hpt tosser from the Husky project:
 
  * The fidoconfig2jamnntpd.pl script can be used to convert your area

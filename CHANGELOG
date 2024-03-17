@@ -1,3 +1,25 @@
+2024-03-17  Nicholas Boel  <axxisd@gmail.com>
+
+2.3.0
+
+  * src/husky/*
+    - Add the initial Husky Project starter kit in order to run a one time
+      command to grab and install huskylib and smapi, which are required in
+      order to compile SmapiNNTPd
+
+  * Makefile.linux, Makefile.win32, Makefile.os2
+    - Set directories for huskylib and smapi files needed for compilation.
+
+  * nntpserv.c
+    - Fix for US-ASCII level parameter
+
+  * nntpserv.h
+    - Major version bump
+
+  * Update README for installation instructions
+
+  * Update CHANGELOG
+
 2024-03-16  Nicholas Boel  <axxisd@gmail.com>
 
 2.2.1

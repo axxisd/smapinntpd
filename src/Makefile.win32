@@ -5,7 +5,7 @@
 PLATFORMDEF = -DPLATFORM_WIN32
 EXESUFFIX = .exe
 
-CC = gcc $(DEFS) -Wall
+CC = gcc $(DEFS) -Wall -Ihusky/smapi/ -Ihusky/huskylib/
 RM = del
 STRIP = strip
 
@@ -18,7 +18,7 @@ makechs$(EXESUFFIX) : makechs.c
 	$(STRIP) makechs$(EXESUFFIX)
 
 smapinntpd$(EXESUFFIX) : $(OBJS)
-	$(CC) -o smapinntpd$(EXESUFFIX) $(OBJS) -lsmapi -lwsock32
+	$(CC) -o smapinntpd$(EXESUFFIX) $(OBJS) -Lhusky/smapi/Build -lsmapi -Lhusky/huskylib/Build -lhusky -lwsock32
 	$(STRIP) smapinntpd$(EXESUFFIX)
 	
 nntpserv.o : nntpserv.c 

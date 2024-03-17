@@ -5,7 +5,7 @@
 PLATFORMDEF = -DPLATFORM_OS2 
 EXESUFFIX = .exe
 
-CC = gcc $(DEFS) -Wall -Zmt
+CC = gcc $(DEFS) -Wall -Zmt -Ihusky/smapi -Ihusky/huskylib/
 RM = del
 STRIP = emxbind -s
 
@@ -18,7 +18,7 @@ makechs$(EXESUFFIX): makechs.c
 	$(STRIP) makechs$(EXESUFFIX)
 
 smapinntpd$(EXESUFFIX): $(OBJS)
-	$(CC) -o smapinntpd$(EXESUFFIX) $(OBJS) -lsmapi -lsocket
+	$(CC) -o smapinntpd$(EXESUFFIX) $(OBJS) -Lhusky/smapi/Build -lsmapi -Lhusky/huskylib/Build -lhusky -lsocket
 	$(STRIP) smapinntpd$(EXESUFFIX)
 
 nntpserv.o : nntpserv.c

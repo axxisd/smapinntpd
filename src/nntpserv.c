@@ -2715,10 +2715,12 @@ void command_post(struct var *var)
       setchrscodepage(chrs,codepage,xlat->tochrs);
       
       if(chrs[0])
-         if(stricmp(chrs,"UTF-8")!=0)
-            sprintf(&kludges[strlen(kludges)],"\01CHRS: %s 2",chrs);
-         else
+         if(stricmp(chrs,"US-ASCII")==0)
+            sprintf(&kludges[strlen(kludges)],"\01CHRS: %s 1",chrs);
+         else if(stricmp(chrs,"UTF-8")==0)
             sprintf(&kludges[strlen(kludges)],"\01CHRS: %s 4",chrs);
+         else
+            sprintf(&kludges[strlen(kludges)],"\01CHRS: %s 2",chrs);
       
       if(codepage[0])
          sprintf(&kludges[strlen(kludges)],"\01CODEPAGE: %s",codepage);
