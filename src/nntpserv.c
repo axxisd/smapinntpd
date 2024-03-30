@@ -558,7 +558,7 @@ void sendtextblock(struct var *var,uchar *text,struct xlat *xlat)
 
       /* Code for format=flowed */
 
-      if(var->opt_flowed && strcmp(buf,"-- ")!=0 && strcmp(buf," * Origin: ")==0)
+      if(var->opt_flowed && strcmp(buf,"-- ")!=0)
       {
          if(wrapped) strcat(buf," "); /* For format=flowed */
          else        strip(buf);
