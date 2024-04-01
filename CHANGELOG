@@ -1,3 +1,18 @@
+2024-04-01  Nicholas Boel  <axxisd@gmail.com>
+
+2.3.4
+
+  * nntpserv.c
+    - Correct the order of how 'min' & 'max' are listed in the command
+      NNTP LIST [ACTIVE] from 'group min max flag' to 'group max min flag'.
+      Reference RFC 3977 (and it's ancestor RFC 977), where they note that
+      'max' comes before 'min'. Original patch by Urs Janßen <urs@tin.org>.
+
+  * nntpserv.h
+    - Minor version bump
+
+  * Update CHANGELOG
+
 2024-03-30  Nicholas Boel  <axxisd@gmail.com>
 
 2.3.3
