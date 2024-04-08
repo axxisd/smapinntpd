@@ -17,6 +17,8 @@ uchar *cfg_xlatfile   = CFG_XLATFILE;
 
 bool cfg_def_flowed = CFG_DEF_FLOWED;
 bool cfg_def_showto = CFG_DEF_SHOWTO;
+bool cfg_def_nonbsp = CFG_DEF_NONBSP;
+bool cfg_def_delssq = CFG_DEF_DELSSQ;
 
 bool cfg_debug;
 bool cfg_noecholog;
@@ -2363,6 +2365,28 @@ void command_post(struct var *var)
 
       line[c]=0;
 
+      /* Replace UTF-8 non-breaking spaces by normal spaces */
+      if(var->opt_nonbsp && strstr(line,"\0xC2\0xA0")!=NULL)
+      {
+         int i = strlen(line)-2;
+         while(i>0)
+         {
+            if (line[i]==0xC2 && line[i+1]==0xA0)
+            {
+               memmove(line+i, line+i+1, strlen(line)-i);
+               line[i] = ' ';
+            }
+            i--;
+         }
+      }
+
+      /* Delete stuffed space from quotes (format=flowed) */
+      if(flowed && var->opt_delssq && line[0]=='>')
+      {
+         if(strlen(line)>3 && strncmp(line,">  ",3)==0)
+            memmove(line+1,line+2,strlen(line)-1);
+      }
+
       if(flowed && line[0]!=0 && line[0]!='>' && strncmp(line,"-- ",3)!=0)
       {
          if(line[0] == ' ')
@@ -2820,7 +2844,7 @@ void command_post(struct var *var)
 void command_authinfo(struct var *var)
 {
    uchar *tmp,*opt,*next,*equal;
-   bool flowed,showto,notearline,smartquote;
+   bool flowed,showto,nonbsp,delssq,notearline,smartquote;
 
    if(!(tmp=parseinput(var)))
    {
@@ -2870,6 +2894,8 @@ void command_authinfo(struct var *var)
 
    flowed=var->opt_flowed;
    showto=var->opt_showto;
+   nonbsp=var->opt_nonbsp;
+   delssq=var->opt_delssq;
    notearline=var->opt_notearline;
    smartquote=var->opt_smartquote;
 
@@ -2917,6 +2943,22 @@ void command_authinfo(struct var *var)
             return;
          }
       }
+      else if(stricmp(opt,"nonbsp")==0)
+      {
+         if(!(setboolonoff(equal,&nonbsp)))
+         {
+            sockprintf(var,"482 Unknown setting %s for option %s, use on or off" CRLF,equal,opt);
+            return;
+         }
+      }
+      else if(stricmp(opt,"delssq")==0)
+      {
+         if(!(setboolonoff(equal,&delssq)))
+         {
+            sockprintf(var,"482 Unknown setting %s for option %s, use on or off" CRLF,equal,opt);
+            return;
+         }
+      }
       else if(stricmp(opt,"notearline")==0)
       {
          if(!(setboolonoff(equal,&notearline)))
@@ -2935,7 +2977,7 @@ void command_authinfo(struct var *var)
       }
       else
       {
-         sockprintf(var,"482 Unknown option %s, known options: flowed, showto, notearline, smartquote" CRLF,opt);
+         sockprintf(var,"482 Unknown option %s, known options: flowed, showto, nonbsp, delssq, notearline, smartquote" CRLF,opt);
          return;
       }
 
@@ -2959,6 +3001,8 @@ void command_authinfo(struct var *var)
 
    var->opt_flowed=flowed;
    var->opt_showto=showto;
+   var->opt_nonbsp=nonbsp;
+   var->opt_delssq=delssq;
    var->opt_notearline=notearline;
    var->opt_smartquote=smartquote;
 
@@ -3002,6 +3046,8 @@ void server(SOCKET s)
    
    var.opt_flowed=cfg_def_flowed;
    var.opt_showto=cfg_def_showto;
+   var.opt_nonbsp=cfg_def_nonbsp;
+   var.opt_delssq=cfg_def_delssq;
    var.opt_notearline=cfg_notearline;
    var.opt_smartquote=cfg_smartquote;
 

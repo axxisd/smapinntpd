@@ -116,7 +116,7 @@ Options for displaying messages:
  -def_showto on/off
 
    Sets the default of the flowed and showto settings (if no default is
-   specified on the commandline, both will be on by default)
+   specified on the command line, both will be on by default).
 
     flowed: If flowed is on, SmapiNNTPd will use format=flowed (section 6.5),
             otherwise it will wrap long lines to a fixed width.
@@ -127,6 +127,19 @@ Options for displaying messages:
 
    These can be modified by the user by logging in with parameters (section 4.4)
    
+ -def_nonbsp
+ -def_delssq
+
+   Sets the default of the nonbsp and delssq settings (if no default is
+   specified on the command line, both will be off by default).
+
+    nonbsp: If nonbsp is on, SmapiNNTPd will replace UTF-8 non-breaking spaces
+            by regular spaces.
+
+    delssq: If delssq is on, SmapiNNTPd will remove space stuffing in quoted
+            text done by some newsreaders.
+
+   These can be modified by the user by logging in with parameters (section 4.4)
 
 Options for posting messages:
 

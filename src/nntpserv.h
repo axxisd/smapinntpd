@@ -59,6 +59,8 @@ struct var
    
    bool opt_flowed;
    bool opt_showto;
+   bool opt_nonbsp;
+   bool opt_delssq;
    bool opt_notearline;
    bool opt_smartquote;
 
@@ -80,7 +82,7 @@ struct var
 #define CRLF CR LF
 
 #define SERVER_NAME       "SmapiNNTPd/" PLATFORM_NAME
-#define SERVER_VERSION    "2.3.4"
+#define SERVER_VERSION    "2.4.0"
 #define SERVER_PIDVERSION SERVER_VERSION
 
 #define SOCKIO_TIMEOUT 5*60
@@ -107,6 +109,8 @@ void server(SOCKET s);
 
 #define CFG_DEF_FLOWED     TRUE
 #define CFG_DEF_SHOWTO     TRUE
+#define CFG_DEF_NONBSP     FALSE
+#define CFG_DEF_DELSSQ     FALSE
 
 #define MAX_NUMBERS_ORIGIN	10
 
@@ -139,3 +143,5 @@ extern bool cfg_readorigin;
 
 extern bool cfg_def_flowed;
 extern bool cfg_def_showto;
+extern bool cfg_def_nonbsp;
+extern bool cfg_def_delssq;
