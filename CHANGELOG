@@ -1,3 +1,14 @@
+2024-04-12  Nicholas Boel  <axxisd@gmail.com>
+
+2.4.1
+
+  * nntpserv.h
+    - Set 'delssq' on by default (remove stuffed spaces from quotes 
+      (format=flowed) by default (patch by @cnb))
+    - Minor version bump
+
+  * Update CHANGELOG
+
 2024-04-08  Nicholas Boel  <axxisd@gmail.com>
 
 2.4.0
