@@ -78,7 +78,7 @@ defaultpost iso-8859-1
 
 #post ISO-8859-1        CP437         iso_437.chs
 #post KOI8-R            CP866         koi_866.chs
-post US-ASCII           US-ASCII
+post US-ASCII           ASCII
 post CP437              CP437
 post CP850              CP850
 post CP866              CP866
@@ -93,4 +93,3 @@ post UTF-8              UTF-8
 
 postalias WINDOWS-1252 ISO-8859-1
 postalias ISO-8859-15  ISO-8859-1
-#postalias US-ASCII     ISO-8859-1

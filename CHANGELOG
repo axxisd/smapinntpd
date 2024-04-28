@@ -1,5 +1,23 @@
 2024-04-12  Nicholas Boel  <axxisd@gmail.com>
 
+2.4.2
+
+  * nntpserv.c
+    - Remove "format=fixed" from Content-Type
+    - Change "US-ASCII" CHRS kludge to "ASCII" per FTS-5003 (pointed out
+      by @cnb)
+
+  * nntpserv.h
+    - Minor version bump
+
+  * smapinntpd.xlat
+    - Change US-ASCII post alias to ASCII
+    - Remove post alias for US-ASCII to ISO-8859-1
+
+  * Update CHANGELOG
+
+2024-04-12  Nicholas Boel  <axxisd@gmail.com>
+
 2.4.1
 
   * nntpserv.h
