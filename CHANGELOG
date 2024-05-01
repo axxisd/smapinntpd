@@ -1,3 +1,17 @@
+2025-05-01  Nicholas Boel  <axxisd@gmail.com>
+
+2.4.3
+
+  * nntpserv.c
+    - Replace Unicode NBSPs only in UTF-8 articles (patch by @cnb)
+    - Replace NBSPs also in ISO-8859-* and Windows-125x articles (patch by
+      @cnb)
+
+  * nntpserv.h
+    - Minor version bump
+
+  * Update CHANGELOG
+
 2024-04-12  Nicholas Boel  <axxisd@gmail.com>
 
 2.4.2
