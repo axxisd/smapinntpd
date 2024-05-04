@@ -1,3 +1,15 @@
+2025-05-04  Nicholas Boel  <axxisd@gmail.com>
+
+2.4.4
+
+  * nntpserv.c
+    - Fix typo in previous commit
+
+  * nntpserv.h
+    - Minor version bump
+
+  * Update CHANGELOG
+
 2025-05-01  Nicholas Boel  <axxisd@gmail.com>
 
 2.4.3

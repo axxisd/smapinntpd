@@ -2388,7 +2388,7 @@ void command_post(struct var *var)
             int i=strlen(line)-1;
             while(i>0)
             {
-               if(line[i]==0xA0) line[i]+' ';
+               if(line[i]==0xA0) line[i]=' ';
                i--;
             }
          }
