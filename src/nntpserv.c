@@ -2370,7 +2370,7 @@ void command_post(struct var *var)
 
       /* Replace non-breaking spaces by normal spaces */
       if(var->opt_nonbsp) {
-         if(strstr(chrs,"UTF-8")==0 && strstr(line,"\0xC2\0xA0")!=NULL)
+         if(stricmp(chrs,"UTF-8")==0 && strstr(line,"\0xC2\0xA0")!=NULL)
          {
             int i=strlen(line)-2;
             while(i>0)
