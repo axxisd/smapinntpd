@@ -1,4 +1,16 @@
-2025-05-04  Nicholas Boel  <axxisd@gmail.com>
+2024-05-08  Nicholas Boel  <axxisd@gmail.com>
+
+2.4.6
+
+  * nntpserv.c
+    - Fix "Re:" not removed from empty subjects (patch by @cnb)
+
+  * nntpserv.h
+    - Minor version bump
+
+  * Update CHANGELOG
+
+2024-05-04  Nicholas Boel  <axxisd@gmail.com>
 
 2.4.5
 
@@ -9,7 +21,7 @@
 
   * Update CHANGELOG
 
-2025-05-04  Nicholas Boel  <axxisd@gmail.com>
+2024-05-04  Nicholas Boel  <axxisd@gmail.com>
 
 2.4.4
 
@@ -21,7 +33,7 @@
 
   * Update CHANGELOG
 
-2025-05-01  Nicholas Boel  <axxisd@gmail.com>
+2024-05-01  Nicholas Boel  <axxisd@gmail.com>
 
 2.4.3
 
