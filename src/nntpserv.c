@@ -2847,7 +2847,7 @@ void command_post(struct var *var)
    
    if(cfg_exitflag)
    {
-         if(utime(cfg_exitflag,NULL) == -1)
+         if(utimes(cfg_exitflag,NULL) == -1)
          {
             fp = fopen(cfg_exitflag,"a");
             fclose(fp);
