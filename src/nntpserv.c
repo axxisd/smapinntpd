@@ -473,7 +473,7 @@ struct attributename attributenames[] =
   { 0,               NULL           } };
 
 #define WRAP_WIDTH 72
-#define LINE_WIDTH 79
+#define LINE_WIDTH 997
 #define MAX_WIDTH 997
 
 void copyline(uchar *dest,uchar *src,long len)

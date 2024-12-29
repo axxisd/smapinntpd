@@ -1,3 +1,16 @@
+2024-12-29  Nicholas Boel  <axxisd@gmail.com>
+
+2.4.8
+
+  * nntpserv.c
+    - Change LINE_WIDTH to allow messages to fit the width of the client's 
+      screen, and to not force wrap flowed text.
+
+  * nntpserv.h
+    - Minor version bump
+
+  * Update CHANGELOG
+
 2024-06-21  Nicholas Boel  <axxisd@gmail.com>
 
 2.4.7
