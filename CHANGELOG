@@ -1,3 +1,17 @@
+2025-01-02  Nicholas Boel  <axxisd@gmail.com>
+
+2.4.9
+
+  * nntpserv.c
+    - Remove empty XHDR response to clients that request it (introduced
+      in commit b9b0a38). The latest version of tin doesn't seem to play
+      nice with it.
+
+  * nntpserv.h
+    - Minor version bump
+
+  * Update CHANGELOG
+
 2024-12-29  Nicholas Boel  <axxisd@gmail.com>
 
 2.4.8

@@ -3223,14 +3223,12 @@ void server(SOCKET s)
             socksendtext(&var,"IHAVE (not implemented, messages are always rejected)" CRLF);
             socksendtext(&var,"LAST" CRLF);
             socksendtext(&var,"LIST" CRLF);
-            socksendtext(&var,"MODE" CRLF);
             socksendtext(&var,"NEWGROUPS (not implemented, always returns an empty list)" CRLF);
             socksendtext(&var,"NEWNEWS (not implemented, always returns an empty list)" CRLF);
             socksendtext(&var,"NEXT" CRLF);
             socksendtext(&var,"QUIT" CRLF);
             socksendtext(&var,"SLAVE (has no effect)" CRLF);
             socksendtext(&var,"STAT" CRLF);
-            socksendtext(&var,"XHDR (not implemented, always returns an empty list)" CRLF);
             socksendtext(&var,"XOVER (partially implemented, byte count and line count are always empty)" CRLF);
             socksendtext(&var,CRLF);
             socksendtext(&var,"SmapiNNTPd supports most of RFC-977 and also has support for AUTHINFO and" CRLF);
@@ -3275,11 +3273,6 @@ void server(SOCKET s)
          {
             socksendtext(&var,"205 Goodbye" CRLF);
             var.disconnect=1;
-         }
-         else if(stricmp(cmd,"XHDR")==0)
-         {
-            socksendtext(&var,"221 Warning: XHDR not implemented, returning empty list" CRLF);
-            socksendtext(&var,"." CRLF);
          }
          else if(stricmp(cmd,"XOVER")==0)
          {
