@@ -1,3 +1,18 @@
+2025-02-04  Nicholas Boel  <axxisd@gmail.com>
+
+2.5.0
+
+  * README
+    - Update dates
+
+  * smapinntpd.txt
+    - Fix odd spacing and tabs. Reformat document for readability.
+
+  * nntpserv.h
+    - Minor version bump
+
+  * Update CHANGELOG
+
 2025-01-02  Nicholas Boel  <axxisd@gmail.com>
 
 2.4.9
