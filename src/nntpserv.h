@@ -2,6 +2,7 @@
 #include <stdarg.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <ctype.h>
 #include <time.h>
 
@@ -16,7 +17,6 @@ typedef unsigned long ulong;
 typedef unsigned short ushort;
 #endif
 
-typedef int bool;
 typedef unsigned char uchar;
 
 #include <smapi/msgapi.h>
@@ -82,7 +82,7 @@ struct var
 #define CRLF CR LF
 
 #define SERVER_NAME       "SmapiNNTPd/" PLATFORM_NAME
-#define SERVER_VERSION    "2.5.0"
+#define SERVER_VERSION    "2.5.1"
 #define SERVER_PIDVERSION SERVER_VERSION
 
 #define SOCKIO_TIMEOUT 5*60

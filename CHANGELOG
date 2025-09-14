@@ -1,3 +1,18 @@
+2025-9-14 Nicholas Boel <axxisd@gmail.com>
+
+2.5.1
+
+  * nntpserv.h
+    - Use '#include <stdbool.h>' rather than manually defining 'bool'.
+      This fixes failure to build with gcc 15.2.1
+    - Minor version bump
+
+  * makechs.c
+    - Use '#include <stdbool.h>' rather than manually defining 'bool'
+      This fixes failure to build with gcc 15.2.1
+
+  * Update CHANGELOG
+
 2025-02-04  Nicholas Boel  <axxisd@gmail.com>
 
 2.5.0
